@@ -1,10 +1,26 @@
-import { useEffect } from "react";
-import { fetchJobs } from "./api/jobs";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
+import SignIn from "./pages/SignIn";
 
-export default function App() {
-  useEffect(() => {
-    fetchJobs("react").then((data) => console.log(data)); // Should log jobs data
-  }, []);
-
-  return <h1 className="text-3xl font-bold text-blue-500">Job Board</h1>;
+function App() {
+  return (
+    <BrowserRouter>
+    <div className="max-w-6xl mx-auto">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/signin" element={<SignIn />} />
+      </Routes>
+      <Footer />
+    </div>
+    </BrowserRouter>
+  );
 }
+
+export default App;
